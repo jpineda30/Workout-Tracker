@@ -1,5 +1,6 @@
 const express = require("express");
 const mongojs = require("mongojs");
+const mongoose = require("mongoose");
 
 const path = require("path");
 
@@ -12,14 +13,14 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-const databaseUrl = "tracker";
-const collections = ["workout"];
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true, useUnifiedTopology: true,useFindAndModify: false });
 
-const db = mongojs(databaseUrl, collections);
+/*const databaseUrl = "tracker";
+const collections = ["workout","excercise"];
 
-db.on("error", error => {
-  console.log("Database Error:", error);
-});
+const db = mongojs(databaseUrl, collections);*/
+
+
 
 require("./routes/routes.js")(app);
 
