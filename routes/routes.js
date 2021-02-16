@@ -63,6 +63,23 @@ module.exports = function(app){
             res.json(err);
           });
       });
+
+     
+
+app.get("/test", (req, res) => {
+
+   db.Workout.aggregate([
+    {
+      $addFields: {
+        total: { $sum: "$exercises._id" } 
+       
+      }
+    }
+   ]).then((response)=>{
+     res.json(response);
+   });
+
+});
     
      
 
