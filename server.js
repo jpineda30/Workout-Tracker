@@ -2,7 +2,7 @@ const express = require("express");
 const mongojs = require("mongojs");
 const mongoose = require("mongoose");
 
-var PORT = 3000 || process.env.PORT;
+var PORT = process.env.PORT || 3000;
 
 const path = require("path");
 
