@@ -2,11 +2,11 @@ const express = require("express");
 const mongojs = require("mongojs");
 const mongoose = require("mongoose");
 
+var PORT = 3000 || process.env.PORT;
+
 const path = require("path");
 
 const app = express();
-
-
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -21,10 +21,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout",
    useFindAndModify: false 
   });
 
-/*const databaseUrl = "tracker";
-const collections = ["workout","excercise"];
 
-const db = mongojs(databaseUrl, collections);*/
 
 
 
@@ -32,6 +29,6 @@ require("./routes/routes.js")(app);
 
 
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("App running on port 3000!");
 });
