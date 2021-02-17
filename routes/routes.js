@@ -21,8 +21,8 @@ module.exports = function(app){
 
       app.get("/api/workouts", (req, res) => {
         console.log("Working so far");  
-        db.Workout.find({},{ sort: { day: 1 }}).populate("exercises").then((response)=>{
-          console.log("Working " + response); 
+        db.Workout.find({}).then((response)=>{
+          
           res.json(response);
         });
       });
@@ -33,29 +33,10 @@ module.exports = function(app){
         }).catch((err)=>{res.json(err)});
       });
 
-      app.put("/api/workouts/:id",(req, res)=>{
-
-        let id= req.params.id;
-       
-
-        db.Excersise.create(req.body).then(({_id})=>{
-        
-          db.Workout.findOneAndUpdate(
-
-              {_id:id},
-              {$push:{exercises:_id}},
-              {new:true}
-
-            ).then((resp)=>{res.json(resp);})
-        });
-
-      });
-
       
       app.get("/api/workouts/range", (req, res) => {
         db.Workout.find({}, null, { sort: { day: 1 } })
-          .populate("exercises")
-          .then((response) => {
+            .then((response) => {
             
             res.json(response);
           })
@@ -79,6 +60,22 @@ app.get("/test", (req, res) => {
      res.json(response);
    });
 
+});
+
+
+app.put("/api/workouts/:id", ({ body, params }, res) => {
+  db.Workout.findByIdAndUpdate(
+    params.id,
+    { $push: { exercises: body } },
+
+    { new: true}
+  )
+    .then(response => {
+      res.json(response);
+    })
+    .catch(err => {
+      res.json(err);
+    });
 });
     
      
