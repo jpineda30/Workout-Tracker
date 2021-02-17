@@ -44,7 +44,7 @@ module.exports = function(app){
              
             }
           }
-         ]).then((response)=>{
+         ]).limit(7).then((response)=>{
            res.json(response);
          });
       });
