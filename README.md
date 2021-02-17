@@ -1,7 +1,7 @@
 # Fitness tracker
 
 ## Menu
-![Preview](public\img\preview.jpg)
+![Preview](./public\img\preview.jpg?raw=true)
 
 [1-Proyect Description](##Proyect-Description)
 
